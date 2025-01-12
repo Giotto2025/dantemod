@@ -46,10 +46,8 @@ public class DanteMod
 
     // Creates a new Block combining the namespace and path
     public static final RegistryObject<Block> INFERNAL_STONE_BLOCK = BLOCKS.register("infernal_stone_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
-    // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
     public static final RegistryObject<Item> INFERNAL_STONE_BLOCK_ITEM = ITEMS.register("infernal_stone_block", () -> new BlockItem(INFERNAL_STONE_BLOCK.get(), new Item.Properties()));
 
-    // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
     public static final RegistryObject<CreativeModeTab> DANTE_TAB = CREATIVE_MODE_TABS.register("dante_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> MC_BOOK.getDefaultInstance())
