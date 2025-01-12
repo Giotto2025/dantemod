@@ -48,10 +48,18 @@ public class DanteMod
     public static final RegistryObject<Block> INFERNAL_STONE_BLOCK = BLOCKS.register("infernal_stone_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     public static final RegistryObject<Item> INFERNAL_STONE_BLOCK_ITEM = ITEMS.register("infernal_stone_block", () -> new BlockItem(INFERNAL_STONE_BLOCK.get(), new Item.Properties()));
 
+    public static final RegistryObject<Block> INFERNAL_BRICKS_BLOCK = BLOCKS.register("infernal_bricks_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER)));
+    public static final RegistryObject<Item> INFERNAL_BRICKS_BLOCK_ITEM = ITEMS.register("infernal_bricks_block", () -> new BlockItem(INFERNAL_BRICKS_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> DITE_BLOCK = BLOCKS.register("dite_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BLUE)));
+    public static final RegistryObject<Item> DITE_BLOCK_ITEM = ITEMS.register("dite_block", () -> new BlockItem(DITE_BLOCK.get(), new Item.Properties()));
+
     public static final RegistryObject<CreativeModeTab> DANTE_TAB = CREATIVE_MODE_TABS.register("dante_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> MC_BOOK.getDefaultInstance())
             .displayItems((parameters, output) -> {
+                output.accept(DITE_BLOCK_ITEM.get());
+                output.accept(INFERNAL_BRICKS_BLOCK_ITEM.get());
                 output.accept(INFERNAL_STONE_BLOCK_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 

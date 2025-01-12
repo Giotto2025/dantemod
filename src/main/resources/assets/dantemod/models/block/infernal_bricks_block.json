@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "dantemod:block/infernal_bricks_block"
+  }
+}
