@@ -3,11 +3,9 @@ package com.dante.dantemod;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -29,6 +27,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
+import static net.minecraft.world.item.Items.registerItem;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(com.dante.dantemod.DanteMod.MODID)
 public class DanteMod
@@ -37,26 +37,24 @@ public class DanteMod
     public static final String MODNAME = "Dante's Divine Comedy";
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    public static final Item MC_BOOK = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft", "book"));
+
+
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a new Block combining the namespace and path
-    public static final RegistryObject<Block> HELL_WALLS_BLOCK = BLOCKS.register("hell_walls_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
+    public static final RegistryObject<Block> INFERNAL_STONE_BLOCK = BLOCKS.register("infernal_stone_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
-    public static final RegistryObject<Item> HELL_WALLS_BLOCK_ITEM = ITEMS.register("hell_walls_block", () -> new BlockItem(HELL_WALLS_BLOCK.get(), new Item.Properties()));
-
-    // Creates a new food item with the id "examplemod:example_id", nutrition 1 and saturation 2
-    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(1).saturationModifier(2f).build())));
+    public static final RegistryObject<Item> INFERNAL_STONE_BLOCK_ITEM = ITEMS.register("infernal_stone_block", () -> new BlockItem(INFERNAL_STONE_BLOCK.get(), new Item.Properties()));
 
     // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
     public static final RegistryObject<CreativeModeTab> DANTE_TAB = CREATIVE_MODE_TABS.register("dante_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
+            .icon(() -> MC_BOOK.getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(EXAMPLE_ITEM.get());
-                output.accept(HELL_WALLS_BLOCK.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(INFERNAL_STONE_BLOCK_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
     public DanteMod()
@@ -100,7 +98,7 @@ public class DanteMod
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            event.accept(HELL_WALLS_BLOCK_ITEM);
+            event.accept(INFERNAL_STONE_BLOCK_ITEM);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
